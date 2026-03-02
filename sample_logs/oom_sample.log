@@ -1,0 +1,19 @@
+24/03/02 08:14:01 INFO SparkContext: Running Spark version 3.4.1
+24/03/02 08:14:02 INFO SparkContext: Submitted application: customer_daily_agg
+24/03/02 08:14:05 INFO YarnClusterScheduler: YarnClusterScheduler.postStartHook done
+24/03/02 08:14:10 INFO DAGScheduler: Submitting 1 missing tasks from Stage 0 (MapPartitionsRDD[3])
+24/03/02 08:14:11 INFO YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef on node-01.prod:45302
+24/03/02 08:15:00 INFO TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 48.9 s
+24/03/02 08:15:30 INFO DAGScheduler: Stage 0 (count at job.py:42) finished in 89.3 s
+24/03/02 08:15:31 INFO DAGScheduler: Submitting Stage 3 (toPandas at job.py:87)
+24/03/02 08:16:00 WARN TaskSetManager: Lost task 14.2 in stage 3.0 (TID 1245) executor 7 (node-04.prod): ExecutorLostFailure
+24/03/02 08:16:44 WARN YarnSchedulerBackend$YarnDriverEndpoint: Lost executor 7 on node-04.prod: Container killed by YARN for exceeding memory limits. 16.5 GB of 16 GB physical memory used. Consider boosting spark.yarn.executor.memoryOverhead or disabling yarn.nodemanager.vmem-check-enabled.
+24/03/02 08:16:45 ERROR SparkUncaughtExceptionHandler: Uncaught exception in thread Thread[Executor task launch worker-14,5,main]
+java.lang.OutOfMemoryError: GC overhead limit exceeded
+	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:155)
+	at org.apache.spark.sql.execution.exchange.ShuffleExchangeExec.execute(ShuffleExchangeExec.scala:119)
+	at org.apache.spark.sql.catalyst.rules.RuleExecutor.execute(RuleExecutor.scala:220)
+24/03/02 08:16:45 ERROR YarnClusterScheduler: Lost executor 7 on node-04.prod: Container killed by YARN for exceeding memory limits.
+24/03/02 08:16:46 ERROR DAGScheduler: Stage 3 (toPandas at job.py:87) failed after 4 attempts
+24/03/02 08:16:46 ERROR SparkContext: Error initializing SparkContext
+24/03/02 08:16:47 INFO SparkContext: Successfully stopped SparkContext

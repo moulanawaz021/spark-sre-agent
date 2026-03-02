@@ -1,0 +1,12 @@
+24/03/02 09:02:01 INFO SparkContext: Running Spark version 3.3.2 on EMR 6.15
+24/03/02 09:02:10 INFO AmazonS3Client: Platform: Amazon EMR us-east-1
+24/03/02 09:02:15 INFO DAGScheduler: Submitting Stage 1 (FileScan at ml_pipeline.py:44)
+24/03/02 09:05:20 WARN RetryUtils: Retrying request to S3 (attempt 3/3)
+24/03/02 09:05:22 ERROR S3NativeFileSystem: Exception while reading s3://prod-data-lake/features/v2/date=2026-03-02/part-00001.parquet
+com.amazonaws.services.s3.model.AmazonS3Exception: Access Denied (Service: Amazon S3; Status Code: 403; Error Code: AccessDenied; Request ID: abc123)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.handleErrorResponse(AmazonHttpClient.java:1819)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeOneRequest(AmazonHttpClient.java:1304)
+24/03/02 09:05:23 ERROR FileFormatWriter: Job aborted due to stage failure: Task 0 in stage 1.0 failed 4 times
+24/03/02 09:05:23 ERROR SparkContext: Error in DAGScheduler.runJob()
+org.apache.spark.SparkException: Job aborted due to stage failure
+	at org.apache.spark.scheduler.DAGScheduler.failJobAndIndependentStages(DAGScheduler.scala:2844)
