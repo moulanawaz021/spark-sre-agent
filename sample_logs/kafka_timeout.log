@@ -1,0 +1,10 @@
+24/03/02 09:21:00 INFO SparkContext: Running Spark Structured Streaming 3.4.2 on Databricks Runtime 13.3 LTS
+24/03/02 09:21:02 INFO StreamExecution: Starting query user_events_streaming [id = abc-123]
+24/03/02 09:21:05 WARN KafkaDataConsumer: KafkaDataConsumer is not running in UninterruptibleThread
+24/03/02 09:21:10 INFO KafkaSourceRDD: Requesting offsets from KafkaSource for topic: user-events-prod
+24/03/02 09:21:44 ERROR MicroBatchExecution: Query [id = abc-123, runId = xyz-456] terminated with error
+org.apache.kafka.common.errors.TimeoutException: Topic 'user-events-prod' not present in metadata after 60000 ms
+	at org.apache.kafka.clients.consumer.internals.ConsumerMetadata.awaitUpdate(ConsumerMetadata.java:259)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.partitionsFor(KafkaConsumer.java:1900)
+24/03/02 09:21:45 ERROR StreamExecution: Query failed: user_events_streaming
+24/03/02 09:21:45 INFO MicroBatchExecution: Committed offsets for batch 0

@@ -1,0 +1,84 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "spark-sre-agent"
+version = "1.0.0"
+description = "Agentic AI system for Spark job log analysis and failure notifications"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["spark", "pyspark", "airflow", "sre", "ai", "anthropic", "monitoring"]
+dependencies = [
+    "pyspark>=3.3.0,<4.0.0",
+    "anthropic>=0.28.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+airflow = ["apache-airflow>=2.6.0"]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.1.0",
+    "mypy>=1.5.0",
+    "rich>=13.0.0",
+]
+
+[project.scripts]
+spark-sre = "main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["spark_sre_agent*"]
+
+# ── Black ─────────────────────────────────────────────────────────────────
+[tool.black]
+line-length = 100
+target-version = ["py310", "py311", "py312"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+    \.git
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+# ── isort ─────────────────────────────────────────────────────────────────
+[tool.isort]
+profile = "black"
+line_length = 100
+known_first_party = ["spark_sre_agent", "config", "core", "airflow_plugin"]
+
+# ── pytest ────────────────────────────────────────────────────────────────
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short --no-header"
+log_cli = true
+log_cli_level = "INFO"
+
+# ── mypy ──────────────────────────────────────────────────────────────────
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+warn_return_any = true
+warn_unused_configs = true
+exclude = [".venv", "build", "dist"]
+
+# ── Coverage ──────────────────────────────────────────────────────────────
+[tool.coverage.run]
+source = ["spark_sre_agent"]
+omit = ["tests/*", ".venv/*", "scripts/*"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+fail_under = 70
